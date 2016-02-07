@@ -1,6 +1,6 @@
 #MusicRetriever 
 
-A library that makes accessing music files on android devices easier
+A library that makes accessing audio files on android devices easier
 
 #How to use:
 
