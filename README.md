@@ -46,6 +46,9 @@ You can contact me for more info or suggestions
 
 <hossamshdesigns@gmail.com>
 
+#Disclaimer:
+
+This project is in beta and is still under heavy development, use at your own risk
 #License
   Copyright 2016 Hossam Sherif
   
