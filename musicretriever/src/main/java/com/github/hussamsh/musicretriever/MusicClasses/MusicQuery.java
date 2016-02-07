@@ -45,13 +45,12 @@ public class MusicQuery {
         private boolean isMainArgumentCalled ;
 
         public Builder addMainArgument(String whereCondition , int operator , String whereVal){
-            //TODO: search for referencing a method in an exception
             if (isMainArgumentCalled)
                 throw new IllegalStateException("addMainArgument has been already called");
 
             if (isAccepted(whereCondition , operator , whereVal)){
                 isMainArgumentCalled = true;
-                addArgument(whereCondition , operator , whereVal);
+                addArgument(whereCondition , operator , whereVal,true);
             }
 
             return this;
@@ -59,23 +58,31 @@ public class MusicQuery {
 
         public Builder and(String whereCondition , int operator , String whereVal){
             if (isAccepted(whereCondition , operator , whereVal))
-                addArgument("AND " + whereCondition , operator , whereVal);
+                addArgument("AND " + whereCondition , operator , whereVal,false);
             return this;
         }
 
         public Builder or(String whereCondition , int operator , String whereVal){
             if (isAccepted(whereCondition , operator , whereVal))
-                addArgument("OR " + whereCondition , operator , whereVal);
+                addArgument("OR " + whereCondition , operator , whereVal ,false);
             return this;
         }
 
-        private void addArgument(String whereCondition, int operator , String whereVal){
+        private void addArgument(String whereCondition, int operator , String whereVal ,boolean first){
             switch (operator){
                 case Operator.EQUALS:
-                    arguments.add(new QueryArgument(whereCondition + "=? ", whereVal));
+                    QueryArgument equalsArgument = new QueryArgument(whereCondition + "=? ", whereVal);
+                    if (first)
+                        arguments.add(equalsArgument);
+                    else
+                        arguments.add(equalsArgument);
                     break;
                 case Operator.LIKE:
-                    arguments.add(new QueryArgument(whereCondition + " LIKE ? ", "%"+whereVal+"%"));
+                    QueryArgument likeArgument= new QueryArgument(whereCondition + " LIKE ? ", "%"+whereVal+"%");
+                    if (first)
+                        arguments.add(0 ,likeArgument);
+                    else
+                        arguments.add(likeArgument);
                     break;
             }
         }
@@ -100,10 +107,8 @@ public class MusicQuery {
             if (isMainArgumentCalled)
                 return new MusicQuery(this);
             else{
-                //TODO: search for referencing a method in an exception
                 throw new IllegalStateException("addMainArgument() must be called");
             }
-
         }
 
         public Builder sortBy(String sortBy){
@@ -117,11 +122,6 @@ public class MusicQuery {
         public ArrayList<QueryArgument> getArguments() {
             return arguments;
         }
-
-        public String getSortBy() {
-            return sortBy;
-        }
-
     }
 
     private static class QueryArgument {
