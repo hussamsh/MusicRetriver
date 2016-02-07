@@ -1,14 +1,14 @@
-package com.github.hussamsh.musicretriever;
+package com.hussamsherif.musicretriever;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
-import com.github.hussamsh.musicretriever.MusicClasses.Album;
-import com.github.hussamsh.musicretriever.MusicClasses.Artist;
-import com.github.hussamsh.musicretriever.MusicClasses.MusicQuery;
-import com.github.hussamsh.musicretriever.MusicClasses.Song;
+import com.hussamsherif.musicretriever.MusicClasses.Album;
+import com.hussamsherif.musicretriever.MusicClasses.Artist;
+import com.hussamsherif.musicretriever.MusicClasses.MusicQuery;
+import com.hussamsherif.musicretriever.MusicClasses.Song;
 
 import java.util.ArrayList;
 

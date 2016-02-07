@@ -1,4 +1,4 @@
-package com.github.hussamsh.musicretriever.MusicClasses;
+package com.hussamsherif.musicretriever.MusicClasses;
 
 public class Artist  {
 

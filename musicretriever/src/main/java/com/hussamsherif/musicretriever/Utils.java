@@ -1,4 +1,4 @@
-package com.github.hussamsh.musicretriever;
+package com.hussamsherif.musicretriever;
 
 
 public class Utils {

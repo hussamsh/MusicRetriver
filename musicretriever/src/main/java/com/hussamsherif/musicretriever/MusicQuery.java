@@ -1,8 +1,5 @@
 
-package com.github.hussamsh.musicretriever.MusicClasses;
-
-import com.github.hussamsh.musicretriever.Operator;
-import com.github.hussamsh.musicretriever.RowConstants;
+package com.hussamsherif.musicretriever;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
-package com.github.hussamsh.musicretriever.MusicClasses;
+package com.hussamsherif.musicretriever.MusicClasses;
 
-import com.github.hussamsh.musicretriever.Utils;
+import com.hussamsherif.musicretriever.Utils;
 
 public class Song {
 

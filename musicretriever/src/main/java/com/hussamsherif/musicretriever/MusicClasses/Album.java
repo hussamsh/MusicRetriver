@@ -1,6 +1,6 @@
-package com.github.hussamsh.musicretriever.MusicClasses;
+package com.hussamsherif.musicretriever.MusicClasses;
 
-import com.github.hussamsh.musicretriever.AlbumArtColor;
+import com.hussamsherif.musicretriever.AlbumArtColor;
 
 public class Album  {
 
