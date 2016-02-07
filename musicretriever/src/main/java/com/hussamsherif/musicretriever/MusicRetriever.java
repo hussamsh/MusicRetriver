@@ -20,8 +20,10 @@ public class MusicRetriever {
 
     private Uri musicUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
 
-    private final String[] SONG_COLUMNS = {RowConstants.SONG_ID, RowConstants.TITLE, RowConstants.ALBUM_ID, RowConstants.ALBUM_NAME, RowConstants.ARTIST_ID,
-            RowConstants.ALBUM_NAME, RowConstants.SONG_DURATION, RowConstants.DATE_ADDED};
+    private final String[] SONG_COLUMNS = {RowConstants.SONG_ID, RowConstants.TITLE, RowConstants.ALBUM_ID,
+            RowConstants.ALBUM_NAME, RowConstants.ARTIST_ID,
+            RowConstants.ARTIST_NAME, RowConstants.SONG_DURATION, RowConstants.DATE_ADDED , RowConstants.COMPOSER ,
+            RowConstants.SIZE , RowConstants.YEAR};
     private final String[] ALBUM_COLUMNS = {RowConstants.ALBUM_NAME, RowConstants.ALBUM_ID, RowConstants.ARTIST_NAME, RowConstants.ARTIST_ID};
     private final String[] ARTIST_COLUMNS = {RowConstants.ARTIST_NAME, RowConstants.ARTIST_ID, RowConstants.ALBUM_ID};
 
