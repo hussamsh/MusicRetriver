@@ -1,80 +1,100 @@
 package com.hussamsherif.musicretriever.MusicClasses;
 
-import com.hussamsherif.musicretriever.Utils;
-
 public class Song {
 
-    public static final int IDENTIFIER = 0 ;
-
-    private long songId;
-    private String title ;
-    private String artist ;
-    private String album ;
+    private long songId ;
+    private String songTitle;
+    private String artistName;
+    private String albumName;
+    private String composerName;
     private long songDuration ;
     private long albumId ;
     private long artistId ;
     private long dateAdded ;
+    private int yearCreated ;
+    private long sizeOnDisk;
 
-    public Song(String title, String artist , String album
-            , long songId , long albumId , long artistId
-            , long songDuration , long dateAdded ) {
-
-        this.title = title;
-        this.artist = artist;
-        this.album = album ;
+    public Song(long songId, String title, String artistName, String albumName,
+                String composerName, long songDuration, long albumId,
+                long artistId, long dateAdded, int yearCreated,
+                long sizeOnDisk) {
         this.songId = songId;
+        this.songTitle = title;
+        this.artistName = artistName;
+        this.albumName = albumName;
+        this.composerName = composerName;
+        this.songDuration = songDuration;
         this.albumId = albumId;
         this.artistId = artistId;
-        this.songDuration = songDuration;
-        this.dateAdded = dateAdded ;
+        this.dateAdded = dateAdded;
+        this.yearCreated = yearCreated;
+        this.sizeOnDisk = sizeOnDisk;
     }
 
+    /**
+     * @return A unique id for a the  audio file
+     */
     public long getSongId() {
         return songId;
     }
-
-    public String getTitle() {
-        return title;
+    /**
+     * @return The songTitle of the audio file, if any
+     */
+    public String getSongTitle() {
+        return songTitle;
     }
-
-    public String getArtist() {
-        return artist;
+    /**
+     * @return The album  the audio file is from, if any
+     */
+    public String getArtistName() {
+        return artistName;
     }
-
+    /**
+     * @return The duration of the audio file, in ms
+     */
     public long getSongDuration() {
         return songDuration;
     }
-
+    /**
+     * @return The id of the album of the audio file is from, if any
+     */
     public long getAlbumId() {
         return albumId;
     }
-
-    public String getAlbum() {
-        return album;
+    /**
+     * @return The artist who created the audio file, if any
+     */
+    public String getAlbumName() {
+        return albumName;
     }
-
+    /**
+     * @return The id of the artist who created the audio file, if any
+     */
     public long getArtistId() {
         return artistId;
     }
-
+    /**
+     * @return The time the file was added to the media provider Units are seconds since 1970.
+     */
     public long getDateAdded() {
         return dateAdded;
     }
-
-    public String getReadableSongDuration(){
-        return Utils.convertToReadableTime(this.getSongDuration());
+    /**
+     * @return The size of the audio file on disk in bytes
+     */
+    public long getSizeOnDisk() {
+        return sizeOnDisk;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this)
-            return true;
-
-        if (!(o instanceof Song))
-            return false;
-
-        Song that = (Song) o ;
-        return this.songId == that.songId  && this.title.equals(that.title) &&
-                this.albumId == that.albumId && this.artistId == that.artistId;
+    /**
+     * @return The composer of the audio file, if any
+     */
+    public String getComposerName() {
+        return composerName;
+    }
+    /**
+     * @return The year the audio file was recorded, if any
+     */
+    public int getYearCreated() {
+        return yearCreated;
     }
 }

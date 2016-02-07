@@ -7,7 +7,6 @@ import android.provider.MediaStore;
 
 import com.hussamsherif.musicretriever.MusicClasses.Album;
 import com.hussamsherif.musicretriever.MusicClasses.Artist;
-import com.hussamsherif.musicretriever.MusicClasses.MusicQuery;
 import com.hussamsherif.musicretriever.MusicClasses.Song;
 
 import java.util.ArrayList;
@@ -120,14 +119,7 @@ public class MusicRetriever {
                     numberOfSongs = cursor.getCount();
                     cursor.close();
                 }
-                final AlbumArtColor albumArtColor = new AlbumArtColor();
-//                Glide.with(resolver).load(musicUri).asBitmap().into(new SimpleTarget<Bitmap>() {
-//                    @Override
-//                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-//                        albumArtColor.set(loadAlbumColor(resource));
-//                    }
-//                });
-                albums.add(new Album(albumName, artistName, albumId, artistId, numberOfSongs, albumArtColor));
+                albums.add(new Album(albumName, artistName, albumId, artistId, numberOfSongs));
             } while (albumsCursor.moveToNext());
             albumsCursor.close();
         }
@@ -142,20 +134,27 @@ public class MusicRetriever {
             int albumIDColumn = musicCursor.getColumnIndex(RowConstants.ALBUM_ID);
             int artistIDColumn = musicCursor.getColumnIndex(RowConstants.ARTIST_ID);
             int titleColumn = musicCursor.getColumnIndex(RowConstants.TITLE);
+            int composerColumn = musicCursor.getColumnIndex(RowConstants.COMPOSER);
             int artistNameColumn = musicCursor.getColumnIndex(RowConstants.ARTIST_NAME);
             int albumNameColumn = musicCursor.getColumnIndex(RowConstants.ALBUM_NAME);
             int songDurationColumn = musicCursor.getColumnIndex(RowConstants.SONG_DURATION);
             int dateAddedColumn = musicCursor.getColumnIndex(RowConstants.DATE_ADDED);
+            int fileSizeColumn = musicCursor.getColumnIndex(RowConstants.SIZE);
+            int yearCreatedColumn = musicCursor.getColumnIndex(RowConstants.YEAR);
             do {
-                long songID = musicCursor.getLong(songIDColumn);
-                long albumID = musicCursor.getLong(albumIDColumn);
+                long songId = musicCursor.getLong(songIDColumn);
+                long albumId = musicCursor.getLong(albumIDColumn);
                 long artistId = musicCursor.getLong(artistIDColumn);
-                String title = musicCursor.getString(titleColumn);
-                String artist = musicCursor.getString(artistNameColumn);
-                String album = musicCursor.getString(albumNameColumn);
+                String songTitle = musicCursor.getString(titleColumn);
+                String artistName = musicCursor.getString(artistNameColumn);
+                String albumName = musicCursor.getString(albumNameColumn);
+                String composerName = musicCursor.getString(composerColumn);
                 long songDuration = musicCursor.getLong(songDurationColumn);
                 long dateAdded = musicCursor.getLong(dateAddedColumn);
-                songs.add(new Song(title, artist, album, songID, albumID, artistId, songDuration, dateAdded));
+                long fileSize = musicCursor.getLong(fileSizeColumn);
+                int yearCreated = musicCursor.getInt(yearCreatedColumn);
+                songs.add(new Song(songId , songTitle , artistName , albumName , composerName ,
+                        songDuration , albumId , artistId , dateAdded , yearCreated , fileSize));
             } while (musicCursor.moveToNext());
             musicCursor.close();
         }
