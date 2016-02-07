@@ -28,10 +28,6 @@ public class MusicRetriever {
     private static ContentResolver resolver ;
     private static MusicRetriever retriever ;
 
-    private static void setResolver(ContentResolver resolver) {
-        MusicRetriever.resolver = resolver;
-    }
-
     public static MusicRetriever with(ContentResolver resolver){
        if (retriever == null)
            retriever = new MusicRetriever();
@@ -40,20 +36,35 @@ public class MusicRetriever {
         return retriever;
     }
 
+    /**
+     * @param orderBy Order by which return the songs
+     * @return Alll songs on the device
+     */
     public ArrayList<Song> getAllSongs(String orderBy) {
         if (!RowConstants.checkIfExists(orderBy))
             throw new IllegalArgumentException("Order by not recognized , Did you get it from RowConstants class");
 
-        return parseSongs(resolver.query(musicUri, SONG_COLUMNS, null, null, null));
+        return parseSongs(resolver.query(musicUri, SONG_COLUMNS, null, null, orderBy));
     }
 
-    public ArrayList<Artist> getAllArtists() {
-        return parseArtists(resolver.query(musicUri, ARTIST_COLUMNS, null, null, null));
+    /**
+     * @param orderBy Order by which return the songs
+     * @return All artists on the device
+     */
+    public ArrayList<Artist> getAllArtists(String orderBy) {
+        if (!RowConstants.checkIfExists(orderBy))
+            throw new IllegalArgumentException("Order by not recognized , Did you get it from RowConstants class");
+
+        return parseArtists(resolver.query(musicUri, ARTIST_COLUMNS, null, null, orderBy));
     }
 
+    /**
+     * @param orderBy Order by which return the songs
+     * @return All albums on the device
+     */
 
-    public ArrayList<Album> getAllAlbums() {
-        return parseAlbums(resolver.query(musicUri, ALBUM_COLUMNS, null, null, null));
+    public ArrayList<Album> getAllAlbums(String orderBy) {
+        return parseAlbums(resolver.query(musicUri, ALBUM_COLUMNS, null, null, orderBy));
     }
 
     public ArrayList<Song> getSongs(MusicQuery musicQuery){
@@ -66,8 +77,8 @@ public class MusicRetriever {
     }
 
     public ArrayList<Artist> getArtists(MusicQuery musicQuery){
-        return parseArtists(resolver.query(musicUri , ARTIST_COLUMNS , musicQuery.getProjection() + " ) GROUP BY ( " + RowConstants.ARTIST_ID ,
-                musicQuery.getSelectionArguments() , musicQuery.getSortBy()));
+        return parseArtists(resolver.query(musicUri, ARTIST_COLUMNS, musicQuery.getProjection() + " ) GROUP BY ( " + RowConstants.ARTIST_ID,
+                musicQuery.getSelectionArguments(), musicQuery.getSortBy()));
     }
 
     private ArrayList<Artist> parseArtists(Cursor artistCursor) {
@@ -164,58 +175,8 @@ public class MusicRetriever {
         return songs;
     }
 
-    public ArrayList<String> queryNames(String nameColumn, String where, String[] whereVal) {
-        Cursor cursor = resolver
-                .query(musicUri, new String[]{nameColumn}, where == null ? MediaStore.Audio.Media.IS_MUSIC : where + "=?", whereVal, null);
-        ArrayList<String> names = new ArrayList<>();
-        if (cursor != null && cursor.moveToFirst()) {
-            int columnIndex = cursor.getColumnIndex(nameColumn);
-            do {
-                String string = cursor.getString(columnIndex);
-                if (!names.contains(string))
-                    names.add(string);
-            } while (cursor.moveToNext());
-            cursor.close();
-        }
-        return names;
+    private static void setResolver(ContentResolver resolver) {
+        MusicRetriever.resolver = resolver;
     }
-
-    private ArrayList<Long> queryIDs(String columnID, String where, String[] whereVal) {
-        Cursor cursor = resolver
-                .query(musicUri, new String[]{columnID}, where == null ? MediaStore.Audio.Media.IS_MUSIC: where + "=?", whereVal, null);
-        ArrayList<Long> values = new ArrayList<>();
-        if (cursor != null && cursor.moveToFirst()) {
-            values = new ArrayList<>(cursor.getCount());
-            int idColumn = cursor.getColumnIndex(columnID);
-            do {
-                long id = cursor.getLong(idColumn);
-                if (!values.contains(id))
-                    values.add(id);
-            } while (cursor.moveToNext());
-            cursor.close();
-        }
-        return values;
-    }
-//
-//    //TODO: Ugly code
-//    private AlbumArtColor loadAlbumColor(final Bitmap bitmap) {
-//        AlbumArtColor albumArtColor = new AlbumArtColor();
-//        if (bitmap != null){
-//            Palette palette = Palette.from(bitmap).generate();
-//            if (palette.getVibrantSwatch() != null)
-//                albumArtColor.setVibrantColor(palette.getVibrantSwatch().getRgb());
-//            if (palette.getLightVibrantSwatch() != null)
-//                albumArtColor.setLightVibrantColor(palette.getLightVibrantSwatch().getRgb());
-//            if (palette.getDarkVibrantSwatch() != null)
-//                albumArtColor.setDarkVibrantColor(palette.getDarkVibrantSwatch().getRgb());
-//            if (palette.getMutedSwatch() != null)
-//                albumArtColor.setMutedColor(palette.getMutedSwatch().getRgb());
-//            if (palette.getLightMutedSwatch() != null)
-//                albumArtColor.setLightMutedColor(palette.getLightMutedSwatch().getRgb());
-//            if (palette.getDarkMutedSwatch() != null)
-//                albumArtColor.setDarkMutedColor(palette.getDarkMutedSwatch().getRgb());
-//        }
-//        return albumArtColor;
-//    }
 }
 
