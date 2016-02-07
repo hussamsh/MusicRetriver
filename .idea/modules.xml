@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MusicRetriverSample.iml" filepath="$PROJECT_DIR$/MusicRetriverSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/musicretriever/musicretriever.iml" filepath="$PROJECT_DIR$/musicretriever/musicretriever.iml" />
+    </modules>
+  </component>
+</project>
