@@ -6,9 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.github.hussamsh.musicretriever.MusicClasses.Album;
-import com.github.hussamsh.musicretriever.MusicClasses.Artist;
-import com.github.hussamsh.musicretriever.MusicClasses.Song;
+import com.hussamsherif.musicretriever.MusicClasses.Album;
+import com.hussamsherif.musicretriever.MusicClasses.Artist;
+import com.hussamsherif.musicretriever.MusicClasses.Song;
 
 import java.util.ArrayList;
 
@@ -27,9 +27,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.CustomViewHolder> {
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
         if (data.get(0) instanceof Song){
-            holder.textView.setText("Title : " + ((Song)data.get(position)).getTitle());
-            holder.secondTextView.setText("Album : " + ((Song)data.get(position)).getAlbum());
-            holder.thirdTextView.setText("Artist : " + ((Song)data.get(position)).getArtist());
+            holder.textView.setText("Title : " + ((Song)data.get(position)).getSongTitle());
+            holder.secondTextView.setText("Album : " + ((Song)data.get(position)).getAlbumName());
+            holder.thirdTextView.setText("Artist : " + ((Song)data.get(position)).getArtistName());
             return;
         }
 

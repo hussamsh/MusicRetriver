@@ -5,9 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.github.hussamsh.musicretriever.MusicClasses.MusicQuery;
-import com.github.hussamsh.musicretriever.MusicRetriever;
-import com.github.hussamsh.musicretriever.RowConstants;
+import com.hussamsherif.musicretriever.MusicQuery;
+import com.hussamsherif.musicretriever.MusicRetriever;
+import com.hussamsherif.musicretriever.Operator;
+import com.hussamsherif.musicretriever.RowConstants;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         MusicQuery.Builder builder = new MusicQuery.Builder()
-                .sortBy(RowConstants.ARTIST_NAME);
+                .addMainArgument(RowConstants.ALBUM_NAME, Operator.EQUALS, "Adele");
         recyclerView.setAdapter(new Adapter(MusicRetriever.with(getContentResolver()).getArtists(builder.build())));
     }
 }
