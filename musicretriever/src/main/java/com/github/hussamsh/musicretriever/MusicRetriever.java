@@ -52,6 +52,7 @@ public class MusicRetriever {
         return parseArtists(resolver.query(musicUri, ARTIST_COLUMNS, null, null, null));
     }
 
+
     public ArrayList<Album> getAllAlbums() {
         return parseAlbums(resolver.query(musicUri, ALBUM_COLUMNS, null, null, null));
     }
